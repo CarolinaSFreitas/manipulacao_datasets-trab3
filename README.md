@@ -1,6 +1,6 @@
 # Trabalho #3 de Estruturas de Dados (Algoritmos II) - Aplicações com Manipulação de Estruturas de Dados: Resumos e Gráficos
 
-A partir da Dataset de previsão de diabetes, criamos um programa que traz as funções:
+## A partir da Dataset de previsão de diabetes, criamos um programa que traz as funções:
 
 1. Resumo dos Dados
   Nº Mulheres: ___
@@ -22,7 +22,7 @@ A partir da Dataset de previsão de diabetes, criamos um programa que traz as fu
   - Entre 131 e 160
   - Acima de 160
 
-Saídas de cada opção:
+### Saídas de cada opção:
 
 1.
 

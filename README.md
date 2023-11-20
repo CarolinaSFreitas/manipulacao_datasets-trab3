@@ -24,7 +24,7 @@
 
 ### Saídas de cada opção:
 
- 1↗️
+ 1⤵️
    ![image](https://github.com/CarolinaSFreitas/previsao_diabetes-trab3/assets/99994934/c85390e3-a7ec-4a92-8144-6b81b0f202cc)
 
  2↗️

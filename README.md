@@ -24,11 +24,8 @@
 
 ### Saídas de cada opção:
 
-1.
-   ![image](https://github.com/CarolinaSFreitas/previsao_diabetes-trab3/assets/99994934/6cd55a80-5d6d-4b53-a628-73635ec31cad)
+1. ![image](https://github.com/CarolinaSFreitas/previsao_diabetes-trab3/assets/99994934/6cd55a80-5d6d-4b53-a628-73635ec31cad)
 
-2.
-   ![image](https://github.com/CarolinaSFreitas/previsao_diabetes-trab3/assets/99994934/b6cfd360-363d-48a5-98a5-3d1815d3742a)
+2. ![image](https://github.com/CarolinaSFreitas/previsao_diabetes-trab3/assets/99994934/b6cfd360-363d-48a5-98a5-3d1815d3742a)
 
-3.
-   ![image](https://github.com/CarolinaSFreitas/previsao_diabetes-trab3/assets/99994934/ff5f1e55-efe6-4f2d-b35c-07fffb3b8f5e)
+3. ![image](https://github.com/CarolinaSFreitas/previsao_diabetes-trab3/assets/99994934/ff5f1e55-efe6-4f2d-b35c-07fffb3b8f5e)

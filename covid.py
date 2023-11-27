@@ -68,24 +68,26 @@ def mortesPorEstado(dados):
 
 # 3 Função com os dados de casos e mortes por mês
 def casosMortesMes(dados):
-    meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
     casos_por_mes = [0] * 12
     mortes_por_mes = [0] * 12
-    recuperados_por_mes = [0] * 12
 
     for linha in dados:
         data = linha['date']
-        mes = int(data.split('-')[1])
+        partes_data = data.split('-')
+        mes_numero = int(partes_data[1])  # Extrai o número do mês da data
+        mes_index = mes_numero - 1  # Ajusta para o índice correto da lista de meses
         casos = float(linha['cases']) if linha['cases'] else 0
         mortes = int(linha['deaths']) if linha['deaths'] else 0
 
         # Acumula os casos e mortes por mês
-        casos_por_mes[mes - 1] += casos
-        mortes_por_mes[mes - 1] += mortes
+        casos_por_mes[mes_index] += casos
+        mortes_por_mes[mes_index] += mortes
+
+    meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
 
     plt.figure(figsize=(10, 6))
 
-    bar_width = 0.25
+    bar_width = 0.35
     index = range(len(meses))
 
     plt.bar(index, casos_por_mes, bar_width, label='Casos')
@@ -94,7 +96,7 @@ def casosMortesMes(dados):
     plt.xlabel('Mês')
     plt.ylabel('Quantidade')
     plt.title('Casos e Mortes de COVID-19 por Mês')
-    plt.xticks([i + bar_width / 2 for i in index], meses)
+    plt.xticks(index, meses)  # Utiliza os nomes dos meses no eixo x
     plt.legend()
 
     plt.tight_layout()

@@ -1,4 +1,4 @@
-# Trabalho #3 de Estruturas de Dados (Algoritmos II) - Aplicações com Manipulação de Estruturas de Dados: Resumos e Gráficos
+# Trabalho #3 (parte1) de Estruturas de Dados (Algoritmos II) - Aplicações com Manipulação de Estruturas de Dados: Resumos e Gráficos
 
 ## A partir da Dataset de previsão de diabetes, criamos um programa que traz as funções:
 

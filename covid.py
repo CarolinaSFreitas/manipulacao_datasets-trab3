@@ -1,8 +1,11 @@
 import matplotlib.pyplot as plt
 import csv
+import numpy as np
+
+from colorama import init, Fore, Style
+init()
 
 dados = []
-
 
 def carrega_dados():
     with open('brazil_covid19.csv', mode='r') as csv_file:
@@ -11,112 +14,124 @@ def carrega_dados():
             dados.append(linha)
 
 
-def titulo(msg, traco="-"):
+def titulo(texto, traco="-"):
     print()
-    print(msg)
+    print(Fore.RED + texto + Style.RESET_ALL)
     print(traco*40)
 
 
-# 1 Função para calcular dados gerais por região e total
-def dados_gerais(dados):
-    casos_por_regiao = {}
+#1 função 
+def resumo_dados():
+    titulo("Visão Geral")
+
+    casos_por_estado = {}
     mortes_por_regiao = {}
     total_casos = 0
     total_mortes = 0
 
     for linha in dados:
         regiao = linha['region']
+        estado = linha['state']
         casos = float(linha['cases']) if linha['cases'] else 0
         mortes = int(linha['deaths']) if linha['deaths'] else 0
 
-        # Calcula casos e mortes por região
-        casos_por_regiao[regiao] = casos_por_regiao.get(regiao, 0) + casos
+        casos_por_estado[estado] = casos_por_estado.get(estado, 0) + casos
         mortes_por_regiao[regiao] = mortes_por_regiao.get(regiao, 0) + mortes
 
-        # Calcula total de casos e mortes
         total_casos += casos
         total_mortes += mortes
 
-    # Encontrar região com mais casos e mortes
-    regiao_mais_casos = max(casos_por_regiao, key=casos_por_regiao.get)
+    estado_mais_casos = max(casos_por_estado, key=casos_por_estado.get)
     regiao_mais_mortes = max(mortes_por_regiao, key=mortes_por_regiao.get)
 
-    # Exibe os resultados
-    print("Região com mais casos:", regiao_mais_casos)
+    print("Estado com mais casos:", estado_mais_casos)
     print("Região com mais mortes:", regiao_mais_mortes)
     print(f"\nTotal de mortes no país todo: {total_mortes}")
 
 
-# 2 Função para criar gráfico de colunas com a quantidade de mortes por estado
-def mortesPorEstado(dados):
-    estados = []
-    mortes = []
+#2 função 
+def casos_regiao():
+    titulo("Casos por Região")
+    
+    casos_regiao = {} 
 
     for linha in dados:
-        estado = linha['state']
-        qtd_mortes = int(linha['deaths']) if linha['deaths'] else 0
-        estados.append(estado)
-        mortes.append(qtd_mortes)
-
-    plt.figure(figsize=(8, 8))
-    plt.pie(mortes, labels=estados, autopct='%1.1f%%', startangle=140)
-    plt.axis('equal')  # Assegura que o gráfico de pizza é desenhado como um círculo
-    plt.title('Distribuição de Mortes por Estado')
-    plt.tight_layout()
-    plt.show()
-
-
-# 3 Função com os dados de casos e mortes por mês
-def casosMortesMes(dados):
-    casos_por_mes = [0] * 12
-    mortes_por_mes = [0] * 12
-
-    for linha in dados:
-        data = linha['date']
-        partes_data = data.split('-')
-        mes_numero = int(partes_data[1])  # Extrai o número do mês da data
-        mes_index = mes_numero - 1  # Ajusta para o índice correto da lista de meses
+        regiao = linha['region']
         casos = float(linha['cases']) if linha['cases'] else 0
-        mortes = int(linha['deaths']) if linha['deaths'] else 0
 
-        # Acumula os casos e mortes por mês
-        casos_por_mes[mes_index] += casos
-        mortes_por_mes[mes_index] += mortes
+        if regiao not in casos_regiao or casos > casos_regiao[regiao]:
+            casos_regiao[regiao] = casos
 
-    meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+    regioes = list(casos_regiao.keys())
+    valores = list(casos_regiao.values())
 
     plt.figure(figsize=(10, 6))
-
-    bar_width = 0.35
-    index = range(len(meses))
-
-    plt.bar(index, casos_por_mes, bar_width, label='Casos')
-    plt.bar([i + bar_width for i in index], mortes_por_mes, bar_width, label='Mortes')
-
-    plt.xlabel('Mês')
-    plt.ylabel('Quantidade')
-    plt.title('Casos e Mortes de COVID-19 por Mês')
-    plt.xticks(index, meses)  # Utiliza os nomes dos meses no eixo x
-    plt.legend()
-
+    plt.bar(regioes, valores, color='skyblue')
+    plt.xlabel('Região')
+    plt.title('Casos de COVID-19 por Região')
+    plt.xticks(rotation=45, ha='right')
     plt.tight_layout()
     plt.show()
 
-# -------------------------------------- Programa Principal
+
+#3 função 
+def casos_RS():
+    titulo("Mortes no RS - 2020 e 2021")
+
+    mortes_RS_2020 = {}
+    mortes_RS_2021 = {}
+
+    dados_RS = [linha for linha in dados if linha['state'] == 'RS']
+
+    for linha in dados_RS:
+        data = linha['date']
+        ano = int(data.split('-')[0])  
+
+        mortes = int(linha['deaths']) if linha['deaths'] else 0
+
+        if ano == 2020:
+            if data in mortes_RS_2020:
+                mortes_RS_2020[data] = max(mortes, mortes_RS_2020[data])
+            else:
+                mortes_RS_2020[data] = mortes
+        elif ano == 2021:
+            if data in mortes_RS_2021:
+                mortes_RS_2021[data] = max(mortes, mortes_RS_2021[data])
+            else:
+                mortes_RS_2021[data] = mortes
+
+    valores_2020 = list(mortes_RS_2020.values())
+    valores_2021 = list(mortes_RS_2021.values())
+
+    maximo_2020 = max(valores_2020)
+    maximo_2021 = max(valores_2021)
+
+    plt.figure(figsize=(8, 6))
+    plt.plot(valores_2020, color='blue', label='Máx. Mortes em 2020', linestyle='-', linewidth=1)
+    plt.plot(valores_2021, color='red', label='Máx. Mortes em 2021', linestyle='-', linewidth=1)
+    plt.ylim(0, max(maximo_2020, maximo_2021))
+    plt.ylabel('Pico de Mortes')
+    plt.title('Comparação de Mortes em 2020 e 2021 no Estado do Rio Grande do Sul')
+    plt.legend()
+    plt.tight_layout()
+    plt.show()
+
+
+# -------------------------------------------- Programa Principal
 carrega_dados()
 
 while True:
     titulo("Coronavírus no Brasil", "=")
     print("1. Resumo dos Dados")
-    print("2. Mortes por Estado - Gráfico de Pizza")
-    print("3. Casos e Mortes por mês - Gráfico de Barras")
+    print("2. Casos por Região - Gráfico")
+    print("3. Mortes no RS - 2020 - 2021 - Gráfico")
     print("4. Finalizar")
     opcao = int(input("Opção: "))
     if opcao == 1:
-        resumoDosDados()
+        resumo_dados()
     elif opcao == 2:
-        mortesPorEstado()
+        casos_regiao()
     elif opcao == 3:
-        casosMortesMes()
+        casos_RS()
     else:
         break

@@ -38,7 +38,7 @@
 
 ## A partir do dataset de Coronavírus, elaborar um programa que leia estes dados, apresente um menu e realize as operações a seguir:
 
-- https://www.kaggle.com/datasets/unanimad/corona-virus-brazil  |  CVS: brazil_Covid19_macro
+- https://www.kaggle.com/datasets/unanimad/corona-virus-brazil  |  CVS: brazil_Covid19
 
 1. Visão Geral: apresente, no mínimo, 3 dados estatísticos sobre o dataset – envolvendo contagem, média, soma, 
 limites (menor e maior) ou agrupamento (a escolha da dupla).

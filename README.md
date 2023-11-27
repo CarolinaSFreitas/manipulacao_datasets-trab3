@@ -32,3 +32,17 @@
 
  3⤵️
    ![image](https://github.com/CarolinaSFreitas/previsao_diabetes-trab3/assets/99994934/00102010-b103-4027-a96f-7f6e20ecd4cd)
+
+
+# Trabalho #3 (parte2) de Estruturas de Dados (Algoritmos II) - Aplicações com Manipulação de Estruturas de Dados: Resumos e Gráficos
+
+## A partir do dataset de Coronavírus, elaborar um programa que leia estes dados, apresente um menu e 
+realize as operações a seguir:
+
+1. Visão Geral: apresente, no mínimo, 3 dados estatísticos sobre o dataset – envolvendo contagem, média, soma, 
+limites (menor e maior) ou agrupamento (a escolha da dupla).
+2. Gráfico relacionando 1 coluna (gráfico de pizza, gráfico de colunas ou gráfico de violino). Pode ser para a 
+exibição dos 4 conteúdos principais de uma coluna ou comparar 3 ou 4 conteúdos informados pelo usuário 
+(gráficos de pizza ou colunas) ou agrupar as contagens de uma coluna numérica (gráfico de violino).
+3. Gráfico relacionando 2 ou mais valores em um intervalo de tempo ou conteúdos (gráfico de linhas ou gráfico de
+barras agrupadas). Também pode ser de conteúdos informados pelo usuário ou de itens constantes no dataset.
